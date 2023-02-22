@@ -9,64 +9,33 @@ console.log('N1 --> ' , res); // 10 - 2 - 3 = 5;
 console.log('N1 --> ' ,res_1); // 3 - 1 = 2;
 
 function setMath(a){
-    if(a == '-'){
-        return function (...number){
-            let result,
-                str = '';
-            for(let i = 0; i < number.length; i++){
-                str += number[i] + a;
-            }
-            str = str.substr(0, str.length - 1);
-            result = number.reduce(function(previousValue, currentValue, index, array) {
+    return function (...number) {
+        let result,
+            str = '';
+        for (let i = 0; i < number.length; i++) {
+            str += number[i] + a;
+        }
+        str = str.substr(0, str.length - 1);
+        if (a == '-') {
+            result = number.reduce(function (previousValue, currentValue, index, array) {
                 return previousValue - currentValue;
             });
-            str += '=' + result;
-            return str;
-        }
-    }else if(a == '+'){
-        return function (...number){
-            let result,
-                str = '';
-            for(let i = 0; i < number.length; i++){
-                str += number[i] + a;
-            }
-            str = str.substr(0, str.length - 1);
-            result = number.reduce(function(previousValue, currentValue, index, array) {
+        } else if (a == '+') {
+            result = number.reduce(function (previousValue, currentValue, index, array) {
                 return previousValue + currentValue;
             });
-            str += '=' + result;
-            return str;
-        }
-    }else if(a == '*'){
-        return function (...number){
-            let result,
-                str = '';
-            for(let i = 0; i < number.length; i++){
-                str += number[i] + a;
-            }
-            str = str.substr(0, str.length - 1);
-            result = number.reduce(function(previousValue, currentValue, index, array) {
+        } else if (a == '*') {
+            result = number.reduce(function (previousValue, currentValue, index, array) {
                 return previousValue * currentValue;
             });
-            str += '=' + result;
-            return str;
-        }
-    }else if(a == '/'){
-        return function (...number){
-            let result,
-                str = '';
-            for(let i = 0; i < number.length; i++){
-                str += number[i] + a;
-            }
-            str = str.substr(0, str.length - 1);
-            result = number.reduce(function(previousValue, currentValue, index, array) {
+        } else if (a == '/') {
+            result = number.reduce(function (previousValue, currentValue, index, array) {
                 return previousValue / currentValue;
             });
-            str += '=' + result;
-            return str;
         }
+        str += '=' + result;
+        return str;
     }
-
 }
 
 // N2
@@ -84,7 +53,6 @@ function setNumbers(a){
     let arg = arguments;
     let str = '',
         result = arg[0];
-
     return function(b){
         if(b == '-'){
             for(let i = 0; i < arg.length; i++){
@@ -93,9 +61,6 @@ function setNumbers(a){
                     result -= arg[i];
                 }
             }
-            str = str.substr(0, str.length - 1);
-            str += '=' + result;
-            return str;
         }else if(b == '+'){
             for(let i = 0; i < arg.length; i++){
                 str += arg[i] + '+';
@@ -103,9 +68,6 @@ function setNumbers(a){
                     result += arg[i];
                 }
             }
-            str = str.substr(0, str.length - 1);
-            str += '=' + result;
-            return str;
         }else if(b == '*'){
             for(let i = 0; i < arg.length; i++){
                 str += arg[i] + '*';
@@ -113,9 +75,6 @@ function setNumbers(a){
                     result *= arg[i];
                 }
             }
-            str = str.substr(0, str.length - 1);
-            str += '=' + result;
-            return str;
         }else if(b == '/'){
             for(let i = 0; i < arg.length; i++){
                 str += arg[i] + '/';
@@ -123,9 +82,9 @@ function setNumbers(a){
                     result /= arg[i];
                 }
             }
-            str = str.substr(0, str.length - 1);
-            str += '=' + result;
-            return str;
         }
+        str = str.substr(0, str.length - 1);
+        str += '=' + result;
+        return str;
     }
 }
